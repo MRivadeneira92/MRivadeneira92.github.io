@@ -6,7 +6,7 @@
     margin: 0;
     font-family: "Playfair";
     font-kerning: normal;
-    color: #d8f3dc;
+    color: #ebebeb !important;
 }
 
 @font-face {
@@ -55,6 +55,7 @@ footer {
 
 #homepage {
     position: relative;
+    overflow: auto;
 }
 
 header {
@@ -96,6 +97,7 @@ h1 {
 .btn-nav {
     transition: transform 0.3s !important;
 }
+
 .btn-nav:hover {
     transform: translateY(-8px);
     cursor: pointer;
@@ -195,10 +197,6 @@ nav {
     position: relative;
 }
 
-.nav-bar {
-    --bs-navbar-color: blue;
-    --bs-navbar-hover-color: none;
-}
 .nav-item::after {
     position: absolute;
 }
@@ -306,6 +304,7 @@ nav {
 .btn-small-deactivaded {
     animation: side-select-off 2s forwards;
 }
+
 @keyframes side-select-on {
     0% {};
     100%{padding-left: 11vh};
