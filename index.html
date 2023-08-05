@@ -19,10 +19,10 @@
         <nav class="navbar navbar-expand-lg navbar-dark position-absolute justify-content-end w-100" id="nav-bar">
             <div class="collapse navbar-collapse pr-4 " id="nav-bar-menu">
                 <div class="navbar-nav" id="nav-container">
-                    <a class="nav-item nav-link btn-nav btn-active" id="button-home">Principal</a>
-                    <a class="nav-item nav-link btn-nav" id="button-about-me">Acerca de mi</a>
-                    <a class="nav-item nav-link btn-nav" id="button-proyects">Proyectos</a>
-                    <a class="nav-item nav-link btn-nav" id="button-contact">Contacto</a>   
+                    <a class="nav-item nav-link btn-nav btn-active btn-nav_hover" id="button-home">Principal</a>
+                    <a class="nav-item nav-link btn-nav btn-nav_hover" id="button-about-me">Acerca de mi</a>
+                    <a class="nav-item nav-link btn-nav btn-nav_hover" id="button-proyects">Proyectos</a>
+                    <a class="nav-item nav-link btn-nav btn-nav_hover" id="button-contact">Contacto</a>   
                 </div>   
             </div>
             <div class="collapse navbar-collapse">
@@ -150,6 +150,10 @@
             setTimeout(()=> {
                 document.getElementById("nav-mobile").style.display="block";
             }, 5600);
+            btnHome.classList.remove("btn-nav_hover");
+            btnAbout.classList.remove("btn-nav_hover");
+            btnProyects.classList.remove("btn-nav_hover");
+            btnContact.classList.remove("btn-nav_hover");
         }
         console.log(smallScreen);
     }
@@ -251,7 +255,9 @@
         document.getElementById("btn-small-menu").classList.add("disabled-button");
         setTimeout(()=> {
             document.getElementById("btn-small-menu").classList.remove("disabled-button");
-            document.getElementById(activeContent).classList.remove("visible");
+            if (document.getElementById(activeContent).classList.contains("visible")){
+                document.getElementById(activeContent).classList.remove("visible");
+            }
         }, 1800);
     }
 
@@ -260,13 +266,16 @@
         blur("container-header");
         document.getElementById("nav-bar-menu").classList.add("collapse");
         document.getElementById("nav-bar-menu").classList.add("hidden");
-        document.getElementById(activeContent).classList.remove("hidden");
-        document.getElementById("btn-small-menu").classList.add("disabled-button");
+        setTimeout(()=> {
+            document.getElementById(activeContent).classList.add("visible");
+        }, 1500);
+        setTimeout(()=>{
+            document.getElementById(activeContent).classList.remove("hidden");
+        }, 2000);
         setTimeout(()=> {
             document.getElementById("btn-small-menu").classList.remove("disabled-button");
         }, 1200);
         setTimeout(()=> {
-            document.getElementById(activeContent).classList.add("visible");
             document.getElementById("nav-bar-menu").classList.remove("visible");
             document.getElementById("nav-bar-menu").classList.remove("hidden");
         }, 1800);
