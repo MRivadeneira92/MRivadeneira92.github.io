@@ -128,8 +128,6 @@
     let langPage = "Es"; 
     let activeButton = "button-home";
     let smallScreen = false; 
-    let darkModeStatus = false;
-    let btnDarkMode = document.getElementById("btn-dark-mode");
     btnHome = document.getElementById("button-home");
     btnAbout = document.getElementById("button-about-me");
     btnProyects = document.getElementById("button-proyects");
@@ -137,19 +135,21 @@
 
     window.onload = function (){
         setTimeout(()=>{
-            document.getElementById("welcome-page").style.display = "none";
+            document.getElementById("welcome-page").style.display="none";
         }, 5100);
         setTimeout (()=> {
-            document.getElementById("nav-bar").style.display = "flex"
+            document.getElementById("nav-bar").style.display="flex"
         }, 5300);
         setTimeout (()=> {
-            document.getElementById("homepage").style.display = "flex";
-            document.getElementById("footer").style.display = "block";
+            document.getElementById("homepage").style.display="flex";
         }, 5500);
         if(window.innerWidth < 800) {
             smallScreen = true;
             btnHome.classList.remove("btn-active");
             btnHome.classList.add("btn-small-active");
+            setTimeout(()=> {
+                document.getElementById("nav-mobile").style.display="block";
+            }, 5600);
         }
         console.log(smallScreen);
     }
@@ -190,11 +190,12 @@
     });
 
     btnMenu.addEventListener("click", function(){
-        showMenu();
-    })
-
-    btnDarkMode.addEventListener("click", function() {
-        darkMode();
+        if (menuOn == false) {
+            showMenu();
+        }
+        else {
+            closeMenu();
+        }
     })
 
     //fades in and out the content on the page
@@ -217,7 +218,7 @@
         }
     }
 
-    // Un and down button animation
+    // Up and down button animation
     function buttonAnimate(buttonName) {
         if (smallScreen == false) {
             document.getElementById(buttonName).classList.add("btn-nav-action");
@@ -240,19 +241,18 @@
         }
     };
 
-    // Control small screen menu
+    // Control responsive menu
     function showMenu(){
         menuOn = true;
         blur("container-header");
         document.getElementById(activeContent).classList.add("hidden");
         document.getElementById("nav-bar-menu").classList.remove("collapse");
         document.getElementById("nav-bar-menu").classList.add("visible");
+        document.getElementById("btn-small-menu").classList.add("disabled-button");
         setTimeout(()=> {
+            document.getElementById("btn-small-menu").classList.remove("disabled-button");
             document.getElementById(activeContent).classList.remove("visible");
         }, 1800);
-        setTimeout(()=> {
-            document.getElementById("nav-bar-menu").classList.add
-        })
     }
 
     // Close menu when button is pressed
@@ -260,10 +260,17 @@
         blur("container-header");
         document.getElementById("nav-bar-menu").classList.add("collapse");
         document.getElementById("nav-bar-menu").classList.add("hidden");
+        document.getElementById(activeContent).classList.remove("hidden");
+        document.getElementById("btn-small-menu").classList.add("disabled-button");
         setTimeout(()=> {
+            document.getElementById("btn-small-menu").classList.remove("disabled-button");
+        }, 1200);
+        setTimeout(()=> {
+            document.getElementById(activeContent).classList.add("visible");
             document.getElementById("nav-bar-menu").classList.remove("visible");
             document.getElementById("nav-bar-menu").classList.remove("hidden");
         }, 1800);
+        menuOn = false;
     }
 
     //Control fade for header 
@@ -286,18 +293,5 @@
             document.getElementById(idName).classList.add("btn-small-active");
         }
     }
-
-    function darkMode() {
-        document.getElementById("body-display").classList.toggle("dark-mode");
-        document.getElementById("homepage").classList.toggle("dark-mode-page");
-        if(darkModeStatus == false) {
-            document.getElementById("btn-dark-mode-switch").innerHTML = "on";
-            darkModeStatus = true;
-        }
-        else {
-            document.getElementById("btn-dark-mode-switch").innerHTML = "off";
-            darkModeStatus = false;
-        }
-        }
   </script>
 </html>
